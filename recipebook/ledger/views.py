@@ -46,7 +46,7 @@ def recipes_list(request):
                     },
                     {
                         "name": "vinegar",
-                        "quantity": "1/2cup"
+                        "quantity": "1/2 cup"
                     },
                     {
                         "name": "water",
@@ -116,7 +116,7 @@ def recipe2(request):
             },
             {
                 "name": "vinegar",
-                "quantity": "1/2cup"
+                "quantity": "1/2 cup"
             },
             {
                 "name": "water",
