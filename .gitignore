@@ -1,0 +1,4 @@
+recipebook/db.sqlite3
+recipebook/.env
+recipebook/**/**/__pycache__
+.DS_Store
