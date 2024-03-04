@@ -1,138 +1,18 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Recipe, Ingredient, RecipeIngredient
 
 def recipes_list(request):
-    context = {
-        "recipes": [
-            {
-                "name": "Recipe 1",
-                "ingredients": [
-                    {
-                        "name": "tomato",
-                        "quantity": "3pcs"
-                    },
-                    {
-                        "name": "onion",
-                        "quantity": "1pc"
-                    },
-                    {
-                        "name": "pork",
-                        "quantity": "1kg"
-                    },
-                    {
-                        "name": "water",
-                        "quantity": "1L"
-                    },
-                    {
-                        "name": "sinigang mix",
-                        "quantity": "1 packet"
-                    }
-                ],
-                "link": "/recipe/1"
-            },
-            {
-                "name": "Recipe 2",
-                "ingredients": [
-                    {
-                        "name": "garlic",
-                        "quantity": "1 head"
-                    },
-                    {
-                        "name": "onion",
-                        "quantity": "1pc"
-                    },
-                    {
-                        "name": "vinegar",
-                        "quantity": "1/2 cup"
-                    },
-                    {
-                        "name": "water",
-                        "quantity": "1 cup"
-                    },
-                    {
-                        "name": "salt",
-                        "quantity": "1 tablespoon"
-                    },
-                    {
-                        "name": "whole black peppers",
-                        "quantity": "1 tablespoon"
-                    },
-                    {
-                        "name": "pork",
-                        "quantity": "1 kilo"
-                    }
-                ],
-                "link": "/recipe/2"
-            }
-        ]
-    }
+    recipes = Recipe.objects.all()
+    context = {'list':recipes}
+
     return render(request, "recipes_list.html", context)
 
-def recipe1(request):
-
+def recipe(request, pk):
+    recipe = Recipe.objects.get(pk = pk)
     context = {
-        "name": "Recipe 1",
-        "ingredients": [
-            {
-                "name": "tomato",
-                "quantity": "3pcs"
-            },
-            {
-                "name": "onion",
-                "quantity": "1pc"
-            },
-            {
-                "name": "pork",
-                "quantity": "1kg"
-            },
-            {
-                "name": "water",
-                "quantity": "1L"
-            },
-            {
-                "name": "sinigang mix",
-                "quantity": "1 packet"
-            }
-        ],
-        "link": "/recipe/1"
+        'name':recipe.name,
+        'ingredients':RecipeIngredient.objects.filter(recipe__name=recipe.name)
     }
 
-    return render(request, "recipe1.html", context)
-
-def recipe2(request):
-    context = {
-        "name": "Recipe 2",
-        "ingredients": [
-            {
-                "name": "garlic",
-                "quantity": "1 head"
-            },
-            {
-                "name": "onion",
-                "quantity": "1pc"
-            },
-            {
-                "name": "vinegar",
-                "quantity": "1/2 cup"
-            },
-            {
-                "name": "water",
-                "quantity": "1 cup"
-            },
-            {
-                "name": "salt",
-                "quantity": "1 tablespoon"
-            },
-            {
-                "name": "whole black peppers",
-                "quantity": "1 tablespoon"
-            },
-            {
-                "name": "pork",
-                "quantity": "1 kilo"
-            }
-        ],
-        "link": "/recipe/2"
-    }
-    
-
-    return render(request, "recipe2.html", context)
+    return render(request, "recipe.html", context)

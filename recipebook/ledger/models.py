@@ -8,7 +8,7 @@ class Ingredient(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('ingredient', args=[str(self.name)])   #returns the URL with the specified name, and can pass arguments to the function
+        return reverse('ingredient', args=[str(self.pk)])   #returns the URL with the specified name, and can pass arguments to the function
 
 class Recipe(models.Model):
     name = models.CharField(max_length=50)
@@ -17,7 +17,7 @@ class Recipe(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('recipe', args=[str(self.name)])
+        return reverse('recipe', args=[str(self.pk)])
 
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=50)
