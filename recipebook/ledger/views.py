@@ -12,6 +12,9 @@ def recipe(request, pk):
     recipe = Recipe.objects.get(pk = pk)
     context = {
         'name':recipe.name,
+        'author':recipe.author,
+        'created_on' : recipe.created_on,
+        'updated_on' : recipe.updated_on,
         'ingredients':RecipeIngredient.objects.filter(recipe__name=recipe.name)
     }
 
