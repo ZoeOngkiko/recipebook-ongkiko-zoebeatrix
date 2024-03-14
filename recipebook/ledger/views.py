@@ -20,4 +20,4 @@ def recipe(request, pk):
         'ingredients':RecipeIngredient.objects.filter(recipe__name=recipe.name)
     }
 
-    return render(request, "recipe.html", context)
+    return render(request, "recipe_detail.html", context)
